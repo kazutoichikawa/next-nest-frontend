@@ -31,10 +31,9 @@ const PostsList: NextPage<PostsListProps> = () => {
     if (postsError) return <div>記事の取得に失敗しました</div>
 
     const elements: JSX.Element[] = [];
-    console.log(postsData)
     postsData.posts.forEach((post: Post) => {
       elements.push(
-        <li>
+        <li key={post.id}>
           <p>タイトル: {post.title}</p>
         </li>
       )
