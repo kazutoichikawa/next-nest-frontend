@@ -1,9 +1,13 @@
-import type { NextPage } from 'next'
+import type { GetServerSideProps, NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 
-const Home: NextPage = () => {
+type Props = {
+  title: string;
+}
+
+const Home: NextPage<Props> = (props) => {
   return (
     <div className={styles.container}>
       <Head>
@@ -14,7 +18,7 @@ const Home: NextPage = () => {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+          {props.title}
         </h1>
 
         <p className={styles.description}>
@@ -67,6 +71,14 @@ const Home: NextPage = () => {
       </footer>
     </div>
   )
+}
+
+export const getServerSideProps: GetServerSideProps<Props> = async () => {
+  return {
+    props: {
+      title: 'Hello, GraphQL',
+    }
+  }
 }
 
 export default Home
